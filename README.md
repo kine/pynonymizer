@@ -1,12 +1,5 @@
 # pynonymizer
 
-## ⚠ Mirror
-I'm currently reviewing moving this from GitLab to Github. For now this is an official mirror, but both  issue trackers/PRs will be monitored.
-
-I'd appreciate any thoughts on this or help coverting my gitlab pipeline!
-
---------
-
 pynonymizer is a universal tool for translating sensitive production database dumps into anonymized copies.
 
 This can help you support GDPR/Data Protection in your organization without compromizing on quality testing data.
