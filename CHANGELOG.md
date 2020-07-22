@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
   -------------------------------------------------------------------
 ## [Unreleased]
+- Added `--mysql-dump-opts`/ `$PYNONYMIZER_MYSQL_DUMP_OPTS` to allow custom command overrides to the mysqldump process.
+- Fixed a bug where complex arguments to faker could cause an invalid seed table column name to be generated.
+
+## [1.9.0] 2020-06-25
+- Fixed a bug where using no fake_update columns would cause an error
+- Changed Documentation for `fake_update` strategies to remove an erroneous example type.
 
 ## [1.8.0] 2020-01-17
 - Added `--dry-run` / `$PYNONYMIZER_DRY_RUN` option to run all the non-destructive fail-fast options without fear of actual process execution.
