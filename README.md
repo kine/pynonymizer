@@ -1,8 +1,13 @@
 # pynonymizer
 
+[![Downloads](https://pepy.tech/badge/pynonymizer)](https://pepy.tech/project/pynonymizer)
+![License](https://img.shields.io/pypi/l/pynonymizer)
+
 pynonymizer is a universal tool for translating sensitive production database dumps into anonymized copies.
 
 This can help you support GDPR/Data Protection in your organization without compromizing on quality testing data.
+
+* [pynonymizer on PyPI](https://pypi.org/project/pynonymizer/)
 
 ### Why are anonymized databases important?
 The primary source of information on how your database is used is in _your production database_. In most situations, the production dataset is usually significantly larger than any development copy, and
@@ -42,7 +47,11 @@ There are a wide variety of data types available which should suit the column in
 * `file_path`
 * `[...]`
 
-For a full list of data generation strategies, see the docs on [strategyfiles](https://gitlab.com/jerometwell/pynonymizer/blob/master/doc/strategyfiles.md)
+For a full list of data generation strategies, see the docs on [strategyfiles](https://github.com/jerometwell/pynonymizer/blob/master/doc/strategyfiles.md)
+
+### Examples
+
+You can see strategyfile examples for existing database, such as wordpress or adventureworks sample database, in the the [examples folder](https://github.com/jerometwell/pynonymizer/blob/master/examples).
 
 ### Process outline
 
@@ -51,7 +60,7 @@ For a full list of data generation strategies, see the docs on [strategyfiles](h
 1. Dump resulting data to file.
 1. Drop temporary database.
 
-If this workflow doesnt work for you, see [process control](https://gitlab.com/jerometwell/pynonymizer/blob/master/doc/process-control.md) to see if it can be adjusted to suit your needs.
+If this workflow doesnt work for you, see [process control](https://github.com/jerometwell/pynonymizer/blob/master/doc/process-control.md) to see if it can be adjusted to suit your needs.
 
 ## Requirements
 * Python >= 3.6
@@ -75,7 +84,7 @@ If this workflow doesnt work for you, see [process control](https://gitlab.com/j
 # Getting Started
 
 ## Usage
-1. Write a [strategyfile](https://gitlab.com/jerometwell/pynonymizer/blob/master/doc/strategyfiles.md) for your database
+1. Write a [strategyfile](https://github.com/jerometwell/pynonymizer/blob/master/doc/strategyfiles.md) for your database
 1. See below:
 ```
 usage: pynonymizer [-h] [--input INPUT] [--strategy STRATEGYFILE]
@@ -150,7 +159,3 @@ optional arguments:
 
 
 ```
-
-## License
-
-[MIT](https://gitlab.com/jerometwell/pynonymizer/blob/master/LICENSE)

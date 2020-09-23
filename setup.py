@@ -19,13 +19,18 @@ setuptools.setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX',
         'Topic :: Database',
         'Intended Audience :: Developers',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8'
     ],
     author='Jerome Twell',
     author_email='jtwell1@gmail.com',
-    url="https://gitlab.com/jerometwell/pynonymizer",
+    url="https://github.com/jerometwell/pynonymizer",
     keywords="anonymization gdpr database mysql",
     license="MIT",
     packages=setuptools.find_packages(),
