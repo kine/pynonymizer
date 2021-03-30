@@ -200,7 +200,7 @@ class MsSqlProvider(DatabaseProvider):
         for i in tqdm(range(0, self.seed_rows), desc="Inserting seed data", unit="rows"):
             self.__insert_seed_row(qualifier_map)
 
-    def __get_column_subquery(self, column_strategy):
+    def __get_column_subquery(self, column_strategy, table_name, field_name):
         if column_strategy.strategy_type == UpdateColumnStrategyTypes.EMPTY:
             return "('')"
         elif column_strategy.strategy_type == UpdateColumnStrategyTypes.UNIQUE_EMAIL:
@@ -211,7 +211,7 @@ class MsSqlProvider(DatabaseProvider):
             column = f"[{column_strategy.qualifier}]"
             if column_strategy.sql_type:
                 column = f"CAST({column} AS {column_strategy.sql_type})"
-            return f"( SELECT TOP 1 {column} FROM [{SEED_TABLE_NAME}] ORDER BY NEWID())"
+            return f"( SELECT TOP 1 {column} FROM [{SEED_TABLE_NAME}] ORDER BY NEWID(),CHECKSUM({SEED_TABLE_NAME}.{column},[{table_name}].[{field_name}]))"
         elif column_strategy.strategy_type == UpdateColumnStrategyTypes.LITERAL:
             return column_strategy.value
         else:
@@ -259,10 +259,11 @@ class MsSqlProvider(DatabaseProvider):
                     total_wheres = len(where_grouping)
 
                     for i, (where, column_map) in enumerate(where_grouping.items()):
-                        column_assignments = ",".join(["[{}] = {}".format(name, self.__get_column_subquery(column)) for name, column in column_map.items()])
+                        column_assignments = ",".join(["[{}] = {}".format(name, self.__get_column_subquery(column,table_name,name)) for name, column in column_map.items()])
                         where_clause = f" WHERE {where}" if where else ""
                         progressbar.set_description("Anonymizing {}: w[{}/{}]".format(table_name, i+1, total_wheres))
-                        self.__db_execute("UPDATE {}[{}] SET {}{};".format(schema_prefix, table_name, column_assignments, where_clause))
+                        print("SET ANSI_WARNINGS off;UPDATE {}[{}] SET {}{};".format(schema_prefix, table_name, column_assignments, where_clause))
+                        self.__db_execute("SET ANSI_WARNINGS off;UPDATE {}[{}] SET {}{};".format(schema_prefix, table_name, column_assignments, where_clause))
 
                 else:
                     raise UnsupportedTableStrategyError(table_strategy)
